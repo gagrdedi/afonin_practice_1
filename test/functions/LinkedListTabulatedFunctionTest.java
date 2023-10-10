@@ -108,4 +108,25 @@ public class LinkedListTabulatedFunctionTest {
         LinkedListTabulatedFunction fun2 = new LinkedListTabulatedFunction(fun1, 0, 1, 10 );
         assertEquals(1, fun2.rightBound());
     }
+
+    @Test
+    void compositeTest(){
+        double[] x = {3, 4, 7, 8, 9};
+        double[] y = {5, 6, 3, 8, 9};
+        IdentityFunction fun1 = new IdentityFunction();
+        LinkedListTabulatedFunction fun2 = new LinkedListTabulatedFunction(x, y);
+        CompositeFunction fun = new CompositeFunction(fun1, fun2);
+        assertEquals(5, fun.apply(3));
+    }
+    @Test
+    void compositeTest2() {
+        double[] x1 = {3, 4, 5, 8};
+        double[] y1 = {1, 3, 5, 7};
+        ArrayTabulatedFunction fun1 = new ArrayTabulatedFunction(x1, y1);
+        double[] x2 = {3, 4, 6, 9};
+        double[] y2 = {.945, .3213, .09, .14};
+        LinkedListTabulatedFunction fun2 = new LinkedListTabulatedFunction(x2, y2);
+        CompositeFunction fun = new CompositeFunction(fun1, fun2);
+        assertEquals(.945, fun.apply(4));
+    }
 }
