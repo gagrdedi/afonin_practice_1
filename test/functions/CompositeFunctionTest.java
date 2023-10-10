@@ -21,4 +21,19 @@ class CompositeFunctionTest {
         fun = new CompositeFunction(fun, fun2);
         assertEquals(625, fun.apply(5));
     }
+
+    @Test
+    void andThen() {
+        IdentityFunction fun1 = new IdentityFunction();
+        SqrFunction fun2 = new SqrFunction();
+        assertEquals(25, fun2.andThen(fun1).apply(5));
+    }
+
+    @Test
+    void andThen2() {
+        ConstantFunction fun1 = new ConstantFunction(5);
+        SqrFunction fun2 = new SqrFunction();
+        IdentityFunction fun3 = new IdentityFunction();
+        assertEquals(25, fun3.andThen(fun2).andThen(fun1).apply(1));
+    }
 }
