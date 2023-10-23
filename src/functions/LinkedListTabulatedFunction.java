@@ -23,10 +23,9 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction{
         @Override
         public boolean equals(Object o) {
             if (!(o instanceof LinkedListTabulatedFunction.Node)) return false;
-            if (((Node) o).x != x) return false;
-            if (((Node) o).y != y) return false;
-            if (((Node) o).next != next) return false;
-            if (((Node) o).prev != prev) return false;
+            Node node = (Node) o;
+            if (node.x != x) return false;
+            if (node.y != y) return false;
             return true;
         }
 
@@ -149,5 +148,46 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction{
     @Override
     public double rightBound() {
         return head.prev.x;
+    }
+
+    @Override
+    public String toString() {
+        String out = head.toString();
+        for (Node node = head.next; node != head; node = node.next)
+            out += node.toString();
+        return out;
+    }
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof LinkedListTabulatedFunction)) return false;
+        LinkedListTabulatedFunction list = (LinkedListTabulatedFunction) o;
+        if (list.count != count) return false;
+        Node node1 = head;
+        Node node2 = list.head;
+        do {
+            if (!node1.equals(node2)) return false;
+            node1 = node1.next;
+            node2 = node2.next;
+        } while (node1 != head);
+        return true;
+    }
+    @Override
+    public int hashCode() {
+        int hash = head.hashCode();
+        for (Node node = head.next; node != head; node = node.next) {
+            hash = hash ^ node.hashCode();
+        }
+        return hash;
+    }
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        double[] x = new double[count];
+        double[] y = new double[count];
+        Node node = head;
+        for (int i = 0; i < count; i++, node = node.next) {
+            x[i] = node.x;
+            y[i] = node.y;
+        }
+        return new LinkedListTabulatedFunction(x, y);
     }
 }
