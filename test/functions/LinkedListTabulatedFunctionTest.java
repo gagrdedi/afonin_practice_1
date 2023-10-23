@@ -14,6 +14,12 @@ public class LinkedListTabulatedFunctionTest {
     }
 
     @Test
+    void apply2() {
+        SqrFunction fun1 = new SqrFunction();
+        LinkedListTabulatedFunction fun = new LinkedListTabulatedFunction(fun1, 0, 1, 20);
+        assertEquals(0.64, fun.apply(0.8), 0.001);
+    }
+    @Test
     void floorIndexOfX() {
         double[] x = {0, 1, 2, 3};
         double[] y = {4, 5, 6, 7};

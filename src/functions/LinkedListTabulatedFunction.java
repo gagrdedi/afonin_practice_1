@@ -1,36 +1,39 @@
 package functions;
 
-class Node{
-    double x;
-    double y;
-    Node next;
-    Node prev;
-    Node(double x, double y){
-        this.x = x;
-        this.y = y;
-        next = this;
-        prev = this;
-    }
-}
 public class LinkedListTabulatedFunction extends AbstractTabulatedFunction{
-    Node head;
+    private static class Node{
+        double x;
+        double y;
+        Node next;
+        Node prev;
+        Node(double x, double y){
+            this.x = x;
+            this.y = y;
+            next = this;
+            prev = this;
+        }
+    }
+    private Node head;
     private int count;
     private void addNode(double x, double y){
         Node node = new Node(x, y);
-        if (count == 0) head = node;
+        if (head == null) {
+            head = node;
+            count = 1;
+        }
         else {
             node.prev = head.prev;
             node.next = head;
             head.prev.next = node;
             head.prev = node;
+            count++;
         }
-        count++;
     }
-    LinkedListTabulatedFunction(double[] xValues, double[] yValues){
+    public LinkedListTabulatedFunction(double[] xValues, double[] yValues){
         for (int i = 0; i < xValues.length; i++)
             this.addNode(xValues[i], yValues[i]);
     }
-    LinkedListTabulatedFunction(MathFunction source, double xFrom, double xTo, int count){
+    public LinkedListTabulatedFunction(MathFunction source, double xFrom, double xTo, int count){
         double step = (xTo-xFrom)/(count-1);
         if (step < 0) step *= -1;
         for (int i = 0; i < count; i++) {
@@ -43,8 +46,8 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction{
     protected int floorIndexOfX(double x) {
         int i;
         Node node = head;
-        for (i = 0; x < node.x && i < count; i++, node = node.next);
-        return i+1;
+        for (i = 0; x > node.x && i < count; i++, node = node.next);
+        return i-1;
     }
 
     @Override

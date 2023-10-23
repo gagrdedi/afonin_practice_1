@@ -15,6 +15,13 @@ class ArrayTabulatedFunctionTest {
     }
 
     @Test
+    void apply2() {
+        SqrFunction fun1 = new SqrFunction();
+        ArrayTabulatedFunction fun = new ArrayTabulatedFunction(fun1, 0, 1, 20);
+        assertEquals(0.64, fun.apply(0.8), 0.001);
+    }
+
+    @Test
     void floorIndexOfX() {
         double[] x = {0, 1, 2, 3};
         double[] y = {4, 5, 6, 7};
