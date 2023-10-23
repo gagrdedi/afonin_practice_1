@@ -7,6 +7,11 @@ public class IdentityFunction implements MathFunction{
     }
 
     @Override
+    public String toString() {
+        return "IdentityFunction{}";
+    }
+
+    @Override
     public boolean equals(Object o) {
         return o instanceof IdentityFunction;
     }
@@ -20,4 +25,6 @@ public class IdentityFunction implements MathFunction{
     protected Object clone() throws CloneNotSupportedException {
         return super.clone();
     }
+
 }
+
