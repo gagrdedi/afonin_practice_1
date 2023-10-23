@@ -1,8 +1,9 @@
 package functions;
 
 import java.util.Arrays;
+import java.util.Objects;
 
-public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
+public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements Cloneable {
 
     private double[] xValues, yValues;
     private int count;
@@ -92,5 +93,35 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
     @Override
     public double rightBound() {
         return xValues[count-1];
+    }
+
+    @Override
+    public String toString() {
+        return "ArrayTabulatedFunction{" +
+                "xValues=" + Arrays.toString(xValues) +
+                ", yValues=" + Arrays.toString(yValues) +
+                ", count=" + count +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ArrayTabulatedFunction that = (ArrayTabulatedFunction) o;
+        return count == that.count && Arrays.equals(xValues, that.xValues) && Arrays.equals(yValues, that.yValues);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(count);
+        result = 31 * result + Arrays.hashCode(xValues);
+        result = 31 * result + Arrays.hashCode(yValues);
+        return result;
+    }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException{
+        return super.clone();
     }
 }
