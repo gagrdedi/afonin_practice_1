@@ -1,16 +1,41 @@
 package functions;
 
 public class LinkedListTabulatedFunction extends AbstractTabulatedFunction{
-    private static class Node{
+    static class Node{
         double x;
         double y;
         Node next;
         Node prev;
-        Node(double x, double y){
+        public Node(double x, double y){
             this.x = x;
             this.y = y;
             next = this;
             prev = this;
+        }
+        @Override
+        public String toString() {
+            return "(" + x + "; " + y + ")";
+        }
+        @Override
+        public int hashCode() {
+            return (int)x^(int)y;
+        }
+        @Override
+        public boolean equals(Object o) {
+            if (!(o instanceof LinkedListTabulatedFunction.Node)) return false;
+            if (((Node) o).x != x) return false;
+            if (((Node) o).y != y) return false;
+            if (((Node) o).next != next) return false;
+            if (((Node) o).prev != prev) return false;
+            return true;
+        }
+
+        @Override
+        public Object clone() {
+            Node node = new Node(x, y);
+            node.next = next;
+            node.prev = prev;
+            return node;
         }
     }
     private Node head;
