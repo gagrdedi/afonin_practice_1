@@ -22,4 +22,28 @@ class IdentityFunctionTest {
         IdentityFunction fun = new IdentityFunction();
         assertEquals(74.064, fun.apply(74.064));
     }
+    @Test
+    void toString1(){
+        IdentityFunction fun = new IdentityFunction();
+        assertEquals("IdentityFunction{}", fun.toString());
+    }
+
+    @Test
+    void equals(){
+        IdentityFunction fun1 = new IdentityFunction();
+        IdentityFunction fun2 = new IdentityFunction();
+        assertEquals(true, fun1.equals(fun2));
+    }
+
+    @Test
+    void hashCode1(){
+        IdentityFunction fun = new IdentityFunction();
+        assertEquals(1, fun.hashCode());
+    }
+
+    @Test
+    void clone1() throws CloneNotSupportedException {
+        IdentityFunction fun = new IdentityFunction();
+        assertEquals(fun, fun.clone());
+    }
 }

@@ -1,6 +1,6 @@
 package functions;
 
-public class IdentityFunction implements MathFunction{
+public class IdentityFunction implements MathFunction, Cloneable{
     @Override
     public double apply(double x) {
         return x;
