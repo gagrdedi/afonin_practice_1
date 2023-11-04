@@ -22,7 +22,9 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction{
         }
         @Override
         public boolean equals(Object o) {
+            if (o == this) return true;
             if (!(o instanceof LinkedListTabulatedFunction.Node)) return false;
+            if (this.hashCode() != o.hashCode()) return false;
             Node node = (Node) o;
             if (node.x != x) return false;
             if (node.y != y) return false;
@@ -159,7 +161,9 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction{
     }
     @Override
     public boolean equals(Object o) {
+        if (this == o) return true;
         if (!(o instanceof LinkedListTabulatedFunction)) return false;
+        if (this.hashCode() != o.hashCode()) return false;
         LinkedListTabulatedFunction list = (LinkedListTabulatedFunction) o;
         if (list.count != count) return false;
         Node node1 = head;
