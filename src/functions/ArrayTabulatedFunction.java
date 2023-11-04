@@ -108,6 +108,7 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+        if (this.hashCode() != o.hashCode()) return false;
         ArrayTabulatedFunction that = (ArrayTabulatedFunction) o;
         return count == that.count && Arrays.equals(xValues, that.xValues) && Arrays.equals(yValues, that.yValues);
     }
