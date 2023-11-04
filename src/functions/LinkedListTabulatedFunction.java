@@ -1,16 +1,40 @@
 package functions;
 
 public class LinkedListTabulatedFunction extends AbstractTabulatedFunction{
-    private static class Node{
+    static class Node{
         double x;
         double y;
         Node next;
         Node prev;
-        Node(double x, double y){
+        public Node(double x, double y){
             this.x = x;
             this.y = y;
             next = this;
             prev = this;
+        }
+        @Override
+        public String toString() {
+            return "(" + x + "; " + y + ")";
+        }
+        @Override
+        public int hashCode() {
+            return (int)x^(int)y;
+        }
+        @Override
+        public boolean equals(Object o) {
+            if (!(o instanceof LinkedListTabulatedFunction.Node)) return false;
+            Node node = (Node) o;
+            if (node.x != x) return false;
+            if (node.y != y) return false;
+            return true;
+        }
+
+        @Override
+        public Object clone() {
+            Node node = new Node(x, y);
+            node.next = next;
+            node.prev = prev;
+            return node;
         }
     }
     private Node head;
@@ -124,5 +148,46 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction{
     @Override
     public double rightBound() {
         return head.prev.x;
+    }
+
+    @Override
+    public String toString() {
+        String out = head.toString();
+        for (Node node = head.next; node != head; node = node.next)
+            out += node.toString();
+        return out;
+    }
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof LinkedListTabulatedFunction)) return false;
+        LinkedListTabulatedFunction list = (LinkedListTabulatedFunction) o;
+        if (list.count != count) return false;
+        Node node1 = head;
+        Node node2 = list.head;
+        do {
+            if (!node1.equals(node2)) return false;
+            node1 = node1.next;
+            node2 = node2.next;
+        } while (node1 != head);
+        return true;
+    }
+    @Override
+    public int hashCode() {
+        int hash = head.hashCode();
+        for (Node node = head.next; node != head; node = node.next) {
+            hash = hash ^ node.hashCode();
+        }
+        return hash;
+    }
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        double[] x = new double[count];
+        double[] y = new double[count];
+        Node node = head;
+        for (int i = 0; i < count; i++, node = node.next) {
+            x[i] = node.x;
+            y[i] = node.y;
+        }
+        return new LinkedListTabulatedFunction(x, y);
     }
 }
