@@ -3,6 +3,7 @@ package functions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class LinkedListTabulatedFunctionTest {
     @Test
@@ -134,5 +135,115 @@ public class LinkedListTabulatedFunctionTest {
         LinkedListTabulatedFunction fun2 = new LinkedListTabulatedFunction(x2, y2);
         CompositeFunction fun = new CompositeFunction(fun1, fun2);
         assertEquals(.945, fun.apply(4));
+    }
+
+    @Test
+    void NodeToString() {
+        LinkedListTabulatedFunction.Node node = new LinkedListTabulatedFunction.Node(1.1, 25.3);
+        assertEquals("(1.1; 25.3)", node.toString());
+    }
+    @Test
+    void NodeEquals() {
+        LinkedListTabulatedFunction.Node node1 = new LinkedListTabulatedFunction.Node(1.1, 25.3);
+        LinkedListTabulatedFunction.Node node2 = new LinkedListTabulatedFunction.Node(1.1, 25.3);
+        assertEquals(node1, node2);
+    }
+    @Test
+    void NodeHashCode() {
+        LinkedListTabulatedFunction.Node node = new LinkedListTabulatedFunction.Node(1.1, 25.3);
+        assertEquals(24, node.hashCode());
+    }
+
+    @Test
+    void NodeClone() throws CloneNotSupportedException {
+        LinkedListTabulatedFunction.Node node1 = new LinkedListTabulatedFunction.Node(1.1, 25.3);
+        assertEquals(node1, node1.clone());
+    }
+
+    @Test
+    void ListToString() {
+        double[] x = {1, 2, 3};
+        double[] y = {4, 5, 6};
+        LinkedListTabulatedFunction fun = new LinkedListTabulatedFunction(x, y);
+        assertEquals("(1.0; 4.0)(2.0; 5.0)(3.0; 6.0)", fun.toString());
+    }
+    @Test
+    void ListEquals() {
+        double[] x = {1, 2, 3};
+        double[] y = {4, 5, 6};
+        LinkedListTabulatedFunction fun1 = new LinkedListTabulatedFunction(x, y);
+        LinkedListTabulatedFunction fun2 = new LinkedListTabulatedFunction(x, y);
+        assertEquals(fun1, fun2);
+    }
+    @Test
+    void ListHashCode() {
+        double[] x = {1, 2, 3};
+        double[] y = {4, 5, 6};
+        LinkedListTabulatedFunction fun = new LinkedListTabulatedFunction(x, y);
+        assertEquals(7, fun.hashCode());
+    }
+    @Test
+    void ListClone() throws CloneNotSupportedException {
+        double[] x = {1, 2, 3};
+        double[] y = {4, 5, 6};
+        LinkedListTabulatedFunction fun = new LinkedListTabulatedFunction(x, y);
+        assertEquals(fun, fun.clone());
+    }
+    @Test
+    void constructorExceptionTest() {
+        double[] x = {1};
+        double[] y = {2};
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+           LinkedListTabulatedFunction fun = new LinkedListTabulatedFunction(x, y);
+        });
+        assertEquals("Not enough points", exception.getMessage());
+    }
+    @Test
+    void constructorExceptionSecondTest() {
+        SqrFunction fun1 = new SqrFunction();
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            LinkedListTabulatedFunction fun2 = new LinkedListTabulatedFunction(fun1, 0, 10, 1);
+        });
+        assertEquals("Not enough points", exception.getMessage());
+    }
+    @Test
+    void floorIndexOfXExceptionTest() {
+        LinkedListTabulatedFunction fun = new LinkedListTabulatedFunction(new SqrFunction(), 0, 1, 5);
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            fun.floorIndexOfX(-1);
+        });
+        assertEquals("Out of bounds", exception.getMessage());
+    }
+    @Test
+    void getXExceptionTest() {
+        LinkedListTabulatedFunction fun = new LinkedListTabulatedFunction(new SqrFunction(), 0, 1, 5);
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+           fun.getX(-1);
+        });
+        assertEquals("Out of bounds", exception.getMessage());
+    }
+    @Test
+    void getXExceptionSecondTest() {
+        LinkedListTabulatedFunction fun = new LinkedListTabulatedFunction(new SqrFunction(), 0, 1, 5);
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            fun.getX(6);
+        });
+        assertEquals("Out of bounds", exception.getMessage());
+    }
+    @Test
+    void getYExceptionTest() {
+        LinkedListTabulatedFunction fun = new LinkedListTabulatedFunction(new SqrFunction(), 0, 1, 5);
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            fun.getY(-1);
+        });
+        assertEquals("Out of bounds", exception.getMessage());
+    }
+    @Test
+    void getYExceptionSecondTest() {
+        LinkedListTabulatedFunction fun = new LinkedListTabulatedFunction(new SqrFunction(), 0, 1, 5);
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            fun.getY(6);
+        });
+        assertEquals("Out of bounds", exception.getMessage());
     }
 }

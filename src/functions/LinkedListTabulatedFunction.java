@@ -55,11 +55,13 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction{
             count++;
         }
     }
-    public LinkedListTabulatedFunction(double[] xValues, double[] yValues){
+    public LinkedListTabulatedFunction(double[] xValues, double[] yValues) throws IllegalArgumentException {
+        if (xValues.length < 2) throw new IllegalArgumentException("Not enough points");
         for (int i = 0; i < xValues.length; i++)
             this.addNode(xValues[i], yValues[i]);
     }
-    public LinkedListTabulatedFunction(MathFunction source, double xFrom, double xTo, int count){
+    public LinkedListTabulatedFunction(MathFunction source, double xFrom, double xTo, int count) throws IllegalArgumentException {
+        if (count < 2) throw new IllegalArgumentException("Not enough points");
         double step = (xTo-xFrom)/(count-1);
         if (step < 0) step *= -1;
         for (int i = 0; i < count; i++) {
@@ -69,10 +71,11 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction{
     }
 
     @Override
-    protected int floorIndexOfX(double x) {
+    protected int floorIndexOfX(double x) throws IllegalArgumentException {
         int i;
         Node node = head;
         for (i = 0; x > node.x && i < count; i++, node = node.next);
+        if (i == 0) throw new IllegalArgumentException("Out of bounds");
         return i-1;
     }
 
@@ -97,7 +100,8 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction{
     }
 
     @Override
-    public double getX(int index) {
+    public double getX(int index) throws IllegalArgumentException {
+        if (index > count || index < 0) throw new IllegalArgumentException("Out of bounds");
         int i;
         Node node = head;
         for (i = index; i != 0; i--){
@@ -107,7 +111,8 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction{
     }
 
     @Override
-    public double getY(int index) {
+    public double getY(int index) throws IllegalArgumentException {
+        if (index > count || index < 0) throw new IllegalArgumentException("Out of bounds");
         int i;
         Node node = head;
         for (i = index; i != 0; i--){
@@ -117,7 +122,8 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction{
     }
 
     @Override
-    public void setY(int index, double value) {
+    public void setY(int index, double value) throws IllegalArgumentException {
+        if (index > count || index < 0) throw new IllegalArgumentException("Out of bounds");
         int i;
         Node node = head;
         for (i = index; i != 0; i--){
