@@ -1,10 +1,13 @@
 package functions;
 
+import exceptions.ArrayIsNotSortedException;
+import exceptions.DifferentLengthOfArraysException;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class ArrayTabulatedFunctionTest {
 
@@ -166,5 +169,30 @@ class ArrayTabulatedFunctionTest {
         double[] y = {4, 5, 6, 5};
         ArrayTabulatedFunction fun = new ArrayTabulatedFunction(x, y);
         assertEquals(fun, fun.clone());
+    }
+
+    void checkLengthIsTheSamePT() throws DifferentLengthOfArraysException {
+        double[] x = {0, 1, 2, 1};
+        double[] y = {4, 5, 6, 5};
+        AbstractTabulatedFunction.checkLengthIsTheSame(x, y);
+    }
+
+@Test
+    void checkLengthIsTheSameNT() throws DifferentLengthOfArraysException {
+        double[] x = {0, 1, 2, 1};
+        double[] y = {4, 5, 6};
+        DifferentLengthOfArraysException Ex = assertThrows( DifferentLengthOfArraysException.class, () -> {AbstractTabulatedFunction.checkLengthIsTheSame(x, y);});
+        assertEquals("Length is not equal", Ex.getMessage());
+    }
+@Test
+    void checkSortedPT() throws ArrayIsNotSortedException{
+        double[] x = {0, 1, 2, 3};
+        assertThrows(ArrayIsNotSortedException.class, () -> {AbstractTabulatedFunction.checkSorted(x);});
+    }
+@Test
+    void checkSortedNT() throws ArrayIsNotSortedException {
+        double[] x = {0, 1, 5, 3};
+        ArrayIsNotSortedException Ex = assertThrows(ArrayIsNotSortedException.class, () -> {AbstractTabulatedFunction.checkSorted(x);});
+        assertEquals("Not sorted", Ex.getMessage());
     }
 }

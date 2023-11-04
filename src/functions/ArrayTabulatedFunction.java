@@ -1,5 +1,8 @@
 package functions;
 
+import exceptions.ArrayIsNotSortedException;
+import exceptions.DifferentLengthOfArraysException;
+
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -7,10 +10,14 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
 
     private double[] xValues, yValues;
     private int count;
-    public ArrayTabulatedFunction(double[] xValues, double[] yValues){
+    public ArrayTabulatedFunction(double[] xValues, double[] yValues) throws DifferentLengthOfArraysException, ArrayIsNotSortedException {
+
+        AbstractTabulatedFunction.checkLengthIsTheSame(xValues, yValues);
+        AbstractTabulatedFunction.checkSorted(xValues);
         count = xValues.length;
         this.xValues = Arrays.copyOf(xValues, count);
         this.yValues = Arrays.copyOf(yValues, count);
+
     }
     public ArrayTabulatedFunction(MathFunction source, double xFrom, double xTo, int count){
         this.count = count;
