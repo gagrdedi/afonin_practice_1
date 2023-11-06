@@ -2,6 +2,7 @@ package functions;
 
 import exceptions.ArrayIsNotSortedException;
 import exceptions.DifferentLengthOfArraysException;
+import exceptions.InterpolationException;
 
 import java.util.Arrays;
 import java.util.Iterator;
@@ -12,7 +13,6 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
     private double[] xValues, yValues;
     private int count;
     public ArrayTabulatedFunction(double[] xValues, double[] yValues) throws DifferentLengthOfArraysException, ArrayIsNotSortedException {
-
         AbstractTabulatedFunction.checkLengthIsTheSame(xValues, yValues);
         AbstractTabulatedFunction.checkSorted(xValues);
         count = xValues.length;
@@ -50,7 +50,8 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
     }
 
     @Override
-    protected double interpolate(double x, int floorIndex) {
+    protected double interpolate(double x, int floorIndex){
+        if(x < getX(floorIndex) || x > getX(floorIndex+1)) throw new InterpolationException("Interpolation exception");
         if (count == 0) return yValues[0];
         return interpolate(x, xValues[floorIndex], xValues[floorIndex+1], yValues[floorIndex], yValues[floorIndex+1]);
     }
