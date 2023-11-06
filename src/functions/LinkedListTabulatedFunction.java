@@ -1,5 +1,7 @@
 package functions;
 
+import java.util.Iterator;
+
 public class LinkedListTabulatedFunction extends AbstractTabulatedFunction{
     static class Node{
         double x;
@@ -199,5 +201,9 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction{
             y[i] = node.y;
         }
         return new LinkedListTabulatedFunction(x, y);
+    }
+    @Override
+    public Iterator<Point> iterator() throws UnsupportedOperationException {
+        throw new UnsupportedOperationException();
     }
 }

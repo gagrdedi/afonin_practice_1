@@ -4,6 +4,7 @@ import exceptions.ArrayIsNotSortedException;
 import exceptions.DifferentLengthOfArraysException;
 
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.Objects;
 
 public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements Cloneable {
@@ -131,5 +132,9 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
     @Override
     protected Object clone() throws CloneNotSupportedException{
         return super.clone();
+    }
+    @Override
+    public Iterator<Point> iterator() throws UnsupportedOperationException{
+        throw new UnsupportedOperationException();
     }
 }
