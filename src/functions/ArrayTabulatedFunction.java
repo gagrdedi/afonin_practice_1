@@ -6,6 +6,7 @@ import exceptions.InterpolationException;
 
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 
 public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements Cloneable {
@@ -134,8 +135,24 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
     protected Object clone() throws CloneNotSupportedException{
         return super.clone();
     }
+
     @Override
-    public Iterator<Point> iterator() throws UnsupportedOperationException{
+    public Iterator<Point> iterator() throws UnsupportedOperationException {
+        Iterator<Point> iterator = new Iterator<Point>() {
+            int i = 0;
+            @Override
+            public boolean hasNext() {
+                return i < count;
+            }
+
+            @Override
+            public Point next() {
+                Point p = new Point(xValues[i], yValues[i]);
+                if (!hasNext()) throw new NoSuchElementException();
+                i++;
+                return p;
+            }
+        };
         throw new UnsupportedOperationException();
     }
 }
