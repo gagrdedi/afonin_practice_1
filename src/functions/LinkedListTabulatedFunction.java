@@ -1,6 +1,7 @@
 package functions;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class LinkedListTabulatedFunction extends AbstractTabulatedFunction{
     static class Node{
@@ -93,6 +94,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction{
 
     @Override
     protected double interpolate(double x, int floorIndex) {
+
         return interpolate(x, getX(floorIndex), getX(floorIndex+1), getY(floorIndex), getY(floorIndex+1));
     }
 
@@ -204,6 +206,22 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction{
     }
     @Override
     public Iterator<Point> iterator() throws UnsupportedOperationException {
+        Iterator<Point> iterator = new Iterator<Point>() {
+            Node node = head;
+            @Override
+            public boolean hasNext() {
+                return node.next != head;
+            }
+
+            @Override
+            public Point next() {
+                Point p = new Point(node.x, node.y);
+                if (hasNext())
+                    node = node.next;
+                else throw new NoSuchElementException();
+                return p;
+            }
+        };
         throw new UnsupportedOperationException();
     }
 }
