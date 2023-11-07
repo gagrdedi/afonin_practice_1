@@ -64,6 +64,7 @@ private interface BiOperation {double apply(double u, double v);}
 
     }
 
+
     public TabulatedFunction minus(TabulatedFunction fun1, TabulatedFunction fun2) throws InconsistentFunctionException{
        BiOperation B = new BiOperation() {
            @Override
