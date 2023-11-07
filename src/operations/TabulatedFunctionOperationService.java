@@ -6,7 +6,6 @@ import functions.TabulatedFunction;
 import functions.factory.ArrayTabulatedFunctionFactory;
 import functions.factory.TabulatedFunctionFactory;
 
-import static sun.management.MemoryNotifInfoCompositeData.getCount;
 
 public class TabulatedFunctionOperationService {
 private interface BiOperation {double apply(double u, double v);}
@@ -72,6 +71,27 @@ private interface BiOperation {double apply(double u, double v);}
                return p1-p2;
            }
        };
+        return doOperation(fun1, fun2, B);
+
+    }
+
+    public TabulatedFunction multiply(TabulatedFunction fun1, TabulatedFunction fun2) throws InconsistentFunctionException{
+        BiOperation B = new BiOperation() {
+            @Override
+            public double apply(double p1, double p2) {
+                return p1*p2;
+            }
+        };
+        return doOperation(fun1, fun2, B);
+
+    }
+    public TabulatedFunction divide(TabulatedFunction fun1, TabulatedFunction fun2) throws InconsistentFunctionException{
+        BiOperation B = new BiOperation() {
+            @Override
+            public double apply(double p1, double p2) {
+                return (double)p1/p2;
+            }
+        };
         return doOperation(fun1, fun2, B);
 
     }
