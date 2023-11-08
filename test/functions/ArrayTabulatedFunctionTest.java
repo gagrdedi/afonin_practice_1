@@ -5,6 +5,7 @@ import exceptions.DifferentLengthOfArraysException;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.Iterator;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -194,5 +195,34 @@ class ArrayTabulatedFunctionTest {
         double[] x = {0, 1, 5, 3};
         ArrayIsNotSortedException Ex = assertThrows(ArrayIsNotSortedException.class, () -> {AbstractTabulatedFunction.checkSorted(x);});
         assertEquals("Not sorted", Ex.getMessage());
+    }
+
+    @Test
+    void iteratorT1() throws UnsupportedOperationException
+    {
+        double[] x = {0, 1, 2};
+        double[] y = {3, 4, 5};
+        ArrayTabulatedFunction fun = new ArrayTabulatedFunction(x, y);
+        Iterator<Point> iterator = fun.iterator();
+        int i = 0;
+        while(iterator.hasNext()) {
+            Point point = iterator.next();
+            assertEquals(point.x, x[i]);
+            assertEquals(point.y, y[i]);
+            i++;
+        }
+    }
+
+    @Test
+    void iteratorT2() {
+        double[] x = {0, 1, 2};
+        double[] y = {3, 4, 5};
+        ArrayTabulatedFunction fun = new ArrayTabulatedFunction(x, y);
+        int i = 0;
+        for (Point point : fun) {
+            assertEquals(point.x, x[i]);
+            assertEquals(point.y, y[i]);
+            i++;
+        }
     }
 }
