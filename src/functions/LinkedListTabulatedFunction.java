@@ -208,7 +208,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction{
     }
     @Override
     public Iterator<Point> iterator() throws UnsupportedOperationException {
-        Iterator<Point> iterator = new Iterator<Point>() {
+        return new Iterator<Point>() {
             Node node = head;
             @Override
             public boolean hasNext() {
@@ -224,6 +224,5 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction{
                 return p;
             }
         };
-        throw new UnsupportedOperationException();
     }
 }
