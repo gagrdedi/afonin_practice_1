@@ -2,6 +2,8 @@ package functions;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Iterator;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -245,5 +247,32 @@ public class LinkedListTabulatedFunctionTest {
             fun.getY(6);
         });
         assertEquals("Out of bounds", exception.getMessage());
+    }
+
+    @Test
+    void iterator() {
+        double[] x = {0, 1, 2};
+        double[] y = {3, 4, 5};
+        LinkedListTabulatedFunction fun = new LinkedListTabulatedFunction(x, y);
+        Iterator<Point> iterator = fun.iterator();
+        int i = 0;
+        while(iterator.hasNext()) {
+            Point point = iterator.next();
+            assertEquals(point.x, x[i]);
+            assertEquals(point.y, y[i]);
+            i++;
+        }
+    }
+    @Test
+    void iterator2() {
+        double[] x = {0, 1, 2};
+        double[] y = {3, 4, 5};
+        LinkedListTabulatedFunction fun = new LinkedListTabulatedFunction(x, y);
+        int i = 0;
+        for (Point point : fun) {
+            assertEquals(point.x, x[i]);
+            assertEquals(point.y, y[i]);
+            i++;
+        }
     }
 }
