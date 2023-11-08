@@ -132,10 +132,10 @@ class ArrayTabulatedFunctionTest {
     }
     @Test
     void equals1() {
-        double[] x1 = {0, 1, 2, 1};
+        double[] x1 = {0, 1, 2, 5};
         double[] y1 = {4, 5, 7, 5};
 
-        double[] x2 = {0, 1, 2, 1};
+        double[] x2 = {0, 1, 2, 5};
         double[] y2 = {4, 5, 7, 5};
 
         ArrayTabulatedFunction fun1 = new ArrayTabulatedFunction(x1, y1);
@@ -145,10 +145,10 @@ class ArrayTabulatedFunctionTest {
 
     @Test
     void equals2() {
-        double[] x1 = {0, 1, 2, 1};
+        double[] x1 = {0, 1, 2, 3};
         double[] y1 = {4, 6, 7, 5};
 
-        double[] x2 = {0, 1, 2, 1};
+        double[] x2 = {0, 1, 2, 4};
         double[] y2 = {4, 5, 7, 5};
 
         ArrayTabulatedFunction fun1 = new ArrayTabulatedFunction(x1, y1);
@@ -158,15 +158,15 @@ class ArrayTabulatedFunctionTest {
 
     @Test
     void hashCode1() {
-        double[] x = {0, 1, 2, 1};
+        double[] x = {0, 1, 2, 3};
         double[] y = {4, 5, 6, 5};
         ArrayTabulatedFunction fun = new ArrayTabulatedFunction(x, y);
-        assertEquals(233010051, fun.hashCode());
+        assertEquals(281768835, fun.hashCode());
     }
 
     @Test
     void clone1() throws CloneNotSupportedException{
-        double[] x = {0, 1, 2, 1};
+        double[] x = {0, 1, 2, 3};
         double[] y = {4, 5, 6, 5};
         ArrayTabulatedFunction fun = new ArrayTabulatedFunction(x, y);
         assertEquals(fun, fun.clone());
@@ -184,11 +184,6 @@ class ArrayTabulatedFunctionTest {
         double[] y = {4, 5, 6};
         DifferentLengthOfArraysException Ex = assertThrows( DifferentLengthOfArraysException.class, () -> {AbstractTabulatedFunction.checkLengthIsTheSame(x, y);});
         assertEquals("Length is not equal", Ex.getMessage());
-    }
-@Test
-    void checkSortedPT() throws ArrayIsNotSortedException{
-        double[] x = {0, 1, 2, 3};
-        assertThrows(ArrayIsNotSortedException.class, () -> {AbstractTabulatedFunction.checkSorted(x);});
     }
 @Test
     void checkSortedNT() throws ArrayIsNotSortedException {
