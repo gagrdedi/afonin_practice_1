@@ -138,7 +138,7 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
 
     @Override
     public Iterator<Point> iterator() throws UnsupportedOperationException {
-        Iterator<Point> iterator = new Iterator<Point>() {
+        return new Iterator<Point>() {
             int i = 0;
             @Override
             public boolean hasNext() {
@@ -153,6 +153,6 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
                 return p;
             }
         };
-        throw new UnsupportedOperationException();
+
     }
 }
