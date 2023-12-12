@@ -206,22 +206,25 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction{
         }
         return new LinkedListTabulatedFunction(x, y);
     }
+
     @Override
     public Iterator<Point> iterator() throws UnsupportedOperationException {
         return new Iterator<Point>() {
             Node node = head;
             @Override
             public boolean hasNext() {
-                return node.next != head;
+                return node != null;
             }
 
             @Override
             public Point next() {
-                Point p = new Point(node.x, node.y);
-                if (hasNext())
-                    node = node.next;
+                if (hasNext()) {
+                    Point point = new Point(node.x, node.y);
+                    if (node.next == head) node = null;
+                    else node = node.next;
+                    return point;
+                }
                 else throw new NoSuchElementException();
-                return p;
             }
         };
     }
