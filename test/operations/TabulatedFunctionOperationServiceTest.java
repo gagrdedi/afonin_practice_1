@@ -16,8 +16,6 @@ public class TabulatedFunctionOperationServiceTest {
 
     @Test
     void asPointTest1(){
-        double[] x = {0, 1, 2};
-        double[] y = {3, 4, 5};
         ArrayTabulatedFunction fun = new ArrayTabulatedFunction(x, y);
         Point[] p = TabulatedFunctionOperationService.asPoints(fun);
         for (int i = 0; i < p.length; i++){
@@ -27,8 +25,6 @@ public class TabulatedFunctionOperationServiceTest {
     }
 @Test
     void asPointTest2(){
-        double[] x = {0, 1, 2};
-        double[] y = {7, 8, 9};
         LinkedListTabulatedFunction fun = new LinkedListTabulatedFunction(x, y);
         Point[] p = TabulatedFunctionOperationService.asPoints(fun);
         for (int i = 0; i < p.length-1; i++){
