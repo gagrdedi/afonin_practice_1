@@ -123,13 +123,13 @@ class ArrayTabulatedFunctionTest {
         assertEquals(1, fun2.rightBound());
     }
 
-    @Test
+    /*@Test
     void toString1() {
         double[] x = {0, 1, 2, 3};
         double[] y = {4, 5, 6, 7};
         ArrayTabulatedFunction fun = new ArrayTabulatedFunction(x, y);
         assertEquals("ArrayTabulatedFunction{xValues=[0.0, 1.0, 2.0, 3.0], yValues=[4.0, 5.0, 6.0, 7.0], count=4}", fun.toString());
-    }
+    }*/
     @Test
     void equals1() {
         double[] x1 = {0, 1, 2, 5};

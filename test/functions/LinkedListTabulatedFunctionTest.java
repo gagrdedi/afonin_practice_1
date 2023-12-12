@@ -162,13 +162,13 @@ public class LinkedListTabulatedFunctionTest {
         assertEquals(node1, node1.clone());
     }
 
-    @Test
+    /*@Test
     void ListToString() {
         double[] x = {1, 2, 3};
         double[] y = {4, 5, 6};
         LinkedListTabulatedFunction fun = new LinkedListTabulatedFunction(x, y);
         assertEquals("(1.0; 4.0)(2.0; 5.0)(3.0; 6.0)", fun.toString());
-    }
+    }*/
     @Test
     void ListEquals() {
         double[] x = {1, 2, 3};

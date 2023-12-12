@@ -164,13 +164,13 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction{
         return head.prev.x;
     }
 
-    @Override
+    /*@Override
     public String toString() {
         String out = head.toString();
         for (Node node = head.next; node != head; node = node.next)
             out += node.toString();
         return out;
-    }
+    }*/
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

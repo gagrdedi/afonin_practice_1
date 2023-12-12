@@ -105,14 +105,14 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
         return xValues[count-1];
     }
 
-    @Override
+    /*@Override
     public String toString() {
         return "ArrayTabulatedFunction{" +
                 "xValues=" + Arrays.toString(xValues) +
                 ", yValues=" + Arrays.toString(yValues) +
                 ", count=" + count +
                 '}';
-    }
+    }*/
 
     @Override
     public boolean equals(Object o) {
