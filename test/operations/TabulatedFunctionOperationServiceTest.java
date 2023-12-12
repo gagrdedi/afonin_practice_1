@@ -87,4 +87,53 @@ public class TabulatedFunctionOperationServiceTest {
         assertEquals(fun3, fun4);
     }
 
+    @Test
+    void multiplicationTest1(){
+        LinkedListTabulatedFunction fun1 = new LinkedListTabulatedFunction(x, y);
+        ArrayTabulatedFunction fun2 = new ArrayTabulatedFunction(x, z);
+        TabulatedFunctionOperationService service = new TabulatedFunctionOperationService(new ArrayTabulatedFunctionFactory());
+        TabulatedFunction fun3 = service.multiply(fun1, fun2);
+        double[] yz = new double[3];
+        for (int i = 0; i < 3; i++)
+            yz[i] = y[i] * z[i];
+        ArrayTabulatedFunction fun4 = new ArrayTabulatedFunction(x, yz);
+        assertEquals(fun3, fun4);
+    }
+    @Test
+    void multiplicationTest2(){
+        LinkedListTabulatedFunction fun1 = new LinkedListTabulatedFunction(y, x);
+        ArrayTabulatedFunction fun2 = new ArrayTabulatedFunction(y, z);
+        TabulatedFunctionOperationService service = new TabulatedFunctionOperationService(new ArrayTabulatedFunctionFactory());
+        TabulatedFunction fun3 = service.multiply(fun1, fun2);
+        double[] xz = new double[3];
+        for (int i = 0; i < 3; i++)
+            xz[i] = x[i] * z[i];
+        ArrayTabulatedFunction fun4 = new ArrayTabulatedFunction(y, xz);
+        assertEquals(fun3, fun4);
+    }
+
+    @Test
+    void divisionTest1(){
+        LinkedListTabulatedFunction fun1 = new LinkedListTabulatedFunction(x, y);
+        ArrayTabulatedFunction fun2 = new ArrayTabulatedFunction(x, z);
+        TabulatedFunctionOperationService service = new TabulatedFunctionOperationService(new ArrayTabulatedFunctionFactory());
+        TabulatedFunction fun3 = service.divide(fun1, fun2);
+        double[] yz = new double[3];
+        for (int i = 0; i < 3; i++)
+            yz[i] = y[i]/z[i];
+        ArrayTabulatedFunction fun4 = new ArrayTabulatedFunction(x, yz);
+        assertEquals(fun3, fun4);
+    }
+    @Test
+    void divisionTest2(){
+        LinkedListTabulatedFunction fun1 = new LinkedListTabulatedFunction(y, x);
+        ArrayTabulatedFunction fun2 = new ArrayTabulatedFunction(y, z);
+        TabulatedFunctionOperationService service = new TabulatedFunctionOperationService(new ArrayTabulatedFunctionFactory());
+        TabulatedFunction fun3 = service.divide(fun1, fun2);
+        double[] xz = new double[3];
+        for (int i = 0; i < 3; i++)
+            xz[i] = x[i]/z[i];
+        ArrayTabulatedFunction fun4 = new ArrayTabulatedFunction(y, xz);
+        assertEquals(fun3, fun4);
+    }
 }
