@@ -13,7 +13,8 @@ public class WriteTask implements Runnable{
     public void run() {
         for (int i = 0; i < function.getCount(); i++) {
             function.setY(i, value);
-            System.out.format("Writing for index %d complete", i);
+            String string = String.format("Writing for index %d complete", i);
+            System.out.println(string);
         }
     }
 }
