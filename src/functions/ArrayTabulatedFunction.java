@@ -4,14 +4,18 @@ import exceptions.ArrayIsNotSortedException;
 import exceptions.DifferentLengthOfArraysException;
 import exceptions.InterpolationException;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 
-public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements Cloneable {
+public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements Cloneable, Serializable {
 
     private double[] xValues, yValues;
+    @Serial
+    private static final long serialVersionUID = 8985759482567066046L;
     private int count;
     public ArrayTabulatedFunction(double[] xValues, double[] yValues) throws DifferentLengthOfArraysException, ArrayIsNotSortedException {
         AbstractTabulatedFunction.checkLengthIsTheSame(xValues, yValues);
