@@ -1,10 +1,17 @@
 package functions;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class LinkedListTabulatedFunction extends AbstractTabulatedFunction{
-    static class Node{
+public class LinkedListTabulatedFunction extends AbstractTabulatedFunction implements Serializable {
+    @Serial
+    private static final long serialVersionUID = -8741933191283403509L;
+
+    static class Node implements Serializable{
+        @Serial
+        private static final long serialVersionUID = 6273748555782483521L;
         double x;
         double y;
         Node next;
@@ -44,6 +51,8 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction{
     }
     private Node head;
     private int count;
+
+
     private void addNode(double x, double y){
         Node node = new Node(x, y);
         if (head == null) {
