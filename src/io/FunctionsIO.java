@@ -56,7 +56,6 @@ final class FunctionsIO {
         return factory.create(xValue, yValue);
     }
 
-
     public static TabulatedFunction readTabulatedFunction(BufferedInputStream inputStream, TabulatedFunctionFactory factory) throws IOException {
 
         DataInputStream in = new DataInputStream(inputStream);
@@ -68,6 +67,12 @@ final class FunctionsIO {
             yValue[i] = in.readDouble();
         }
         return factory.create(xValue, yValue);
+    }
+
+    public static void serialize(BufferedOutputStream stream, TabulatedFunction fun) throws IOException {
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(stream);
+        objectOutputStream.writeObject(fun);
+        objectOutputStream.flush();
     }
 
 }
