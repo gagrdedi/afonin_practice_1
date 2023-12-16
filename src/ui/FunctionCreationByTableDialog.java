@@ -7,15 +7,20 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class FunctionCreationByTableDialog extends JDialog {
+    public TabulatedFunctionFactory getFactory() {
+        return factory;
+    }
 
+    private final TabulatedFunctionFactory factory;
     public FunctionCreationByTableDialog(JFrame parent, TabulatedFunctionFactory factory) {
         super(parent, "Создание функции по таблице", true);
+        this.factory = factory;
         setSize(500, 300);
         setLocationRelativeTo(parent);
         setResizable(false);
         setLayout(null);
 
-        JTextField sizeField = new JTextField("TEXT");
+        JTextField sizeField = new JTextField("3");
         sizeField.setBounds(50, 10, 400, 30);
         add(sizeField);
 
@@ -40,6 +45,7 @@ public class FunctionCreationByTableDialog extends JDialog {
              int size = Integer.parseInt(text);
              if (size < 2) displayException("Функция должна иметь минимум 2 точки!");
              else {
+                 new TabulatedFunctionTableDialog(this, size);
              }
         } catch (NumberFormatException e) {
             displayException("Некорректный ввод, нужно ввести число!");
